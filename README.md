@@ -1,8 +1,8 @@
 # RunDB
 
-RunDB in-memory database with persistence for NodeJS.
+RunDB in-memory database with persistence for NodeJS. Fast database for small to medium size data sets.
 
-Fast database for small to medium size data sets. Based on [NeDB](https://github.com/louischatriot/nedb) and follows the [Waveorb database adapter spec.](https://github.com/eldoy/waveorb-db)
+Based on [NeDB](https://github.com/louischatriot/nedb) and follows the [Waveorb database adapter spec.](https://github.com/eldoy/waveorb-db)
 
 ### Install
 `npm i rundb`
