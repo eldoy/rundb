@@ -1,0 +1,19 @@
+{
+  "name": "rundb",
+  "version": "0.1.0",
+  "description": "RunDB database client",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --runInBand"
+  },
+  "author": "Vidar Eldøy <vidar@eldoy.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cuid": "^2.1.8",
+    "lodash": "^4.17.21",
+    "mongodb": "^3.6.4"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
