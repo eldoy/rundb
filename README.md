@@ -1,57 +1,50 @@
-# Mongowave MongoDB Client
+# RunDB
 
-Javascript document database based on MongoDB.
+RunDB in-memory database with persistence for NodeJS.
 
-This library is meant for sites with high traffic demands running on multiple machines.
+Fast database for small to medium size data sets. Based on [NeDB](https://github.com/louischatriot/nedb) and follows the [Waveorb database adapter spec.](https://github.com/eldoy/waveorb-db)
 
 ### Install
-`npm i mongowave`
+`npm i rundb`
 
 ### Usage
-```javascript
-/* Connect to database */
-const connection = require('mongowave')
+**Connect to database**
+```js
+const connection = require('rundb')
+const db = await connection()
+```
 
-/* Default options */
-const db = await connection({
-  // URL of database server
-  url: 'mongodb://localhost:27017',
-
-  // Name of database
-  name: 'mongowave',
-
-  // Automatically set created_at and updated_at fields on change
-  timestamps: false,
-
-  // Mark as deleted with deleted_at time instead of actually deleting
-  softdelete: false,
-
-  // Use 'id' instead of '_id' as default identifier
-  fakeid: false
-})
-
-/* Insert document */
-// Returns the inserted id: { id: '507f191e810c19729de860ea' }
+**Create document**
+```js
+// Returns the created id: { id: '507f191e810c19729de860ea' }
 // Takes only 1 argument: values
 const result = await db('project').create({ name: 'hello' })
+```
 
-/* Insert multiple documents */
-// Returns the the inserted count and the inserted ids:
+**Create multiple documents**
+```js
+// Returns the the created count and the created ids:
 // { n: 2, ids: ['507f191e810c19729de860ea', '607f191e810c19729de860eb'] }
 // Takes only 1 argument: values, must be array of objects
 const result = await db('project').create([{ name: 'hello' }, { name: 'bye' }])
+```
 
-/* Update document (updates multiple if query matches) */
+**Update document (updates multiple if query matches)**
+```js
 // Returns the number of updated documents: { n: 1 }
 // Takes 2 arguments: query, values
 const result = await db('project').update({ id: '507f191e810c19729de860ea' }, { name: 'bye' })
+```
 
-/* Delete document (deletes multiple if query matches) */
+**Delete document (deletes multiple if query matches)**
+```js
 // Returns the number of deleted documents: { n: 1 }
 // Takes 1 argument: query
 const result = await db('project').delete({ id: '507f191e810c19729de860ea' })
+```
 
-/* Find document */
+**Find document**
+```js
 // Returns an array of matching documents
 // Takes 2 arguments: query, options
 
@@ -75,24 +68,25 @@ const result = await db('project').find({}, { fields: { name: false } })
 
 // Find all with 'level' field greater than 5
 const result = await db('project').find({ level: { $gt: 5 }})
+```
+All of the [mongodb query operators](https://docs.mongodb.com/manual/reference/operator/query/) should work.
 
-// All of the mongodb query operators work:
-// https://docs.mongodb.com/manual/reference/operator/query/
-
-/* Get document */
+**Get document**
+```js
 // Returns the first matching document
 // Takes 2 arguments: query, options
 const result = await db('project').get({ name: 'bye' })
+```
 
-/* Count documents */
+**Count documents**
+```js
 // Returns the count of the matching query
 // Takes 2 arguments: query, options
 const result = await db('project').count({ name: 'bye' })
+```
 
-/* Use the mongodb client base directly */
-db.base.collection('project').findOne({ _id: insert._id })
-
-/* The mongodb client */
+**The database client**
+```js
 db.client
 ```
 

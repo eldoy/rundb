@@ -1,7 +1,7 @@
 {
   "name": "rundb",
   "version": "0.1.0",
-  "description": "RunDB database client",
+  "description": "RunDB in-memory database with persistence for NodeJS",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --runInBand"
