@@ -1,8 +1,7 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')()
 
 describe('Delete', () => {
-  beforeAll(async () => db = await connection())
+
   beforeEach(async () => await db.drop())
 
   it('should delete a document', async () => {

@@ -1,8 +1,6 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')({ fakeid: true })
 
 describe('FakeID', () => {
-  beforeAll(async () => db = await connection({ fakeid: true }))
   beforeEach(async () => await db.drop())
 
   it('should create with id and not _id - automatic', async () => {

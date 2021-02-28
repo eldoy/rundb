@@ -1,8 +1,7 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')()
 
 describe('Update', () => {
-  beforeAll(async () => db = await connection())
+
   beforeEach(async () => await db.drop())
 
   it('should update a document', async () => {

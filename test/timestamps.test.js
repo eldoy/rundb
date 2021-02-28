@@ -1,8 +1,6 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')({ timestamps: true })
 
 describe('Timestamps', () => {
-  beforeAll(async () => db = await connection({ timestamps: true }))
   beforeEach(async () => await db.drop())
 
   it('should add timestamps on create', async () => {

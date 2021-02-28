@@ -1,8 +1,7 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')()
 
 describe('Get', () => {
-  beforeAll(async () => db = await connection())
+
   beforeEach(async () => await db.drop())
 
   // Test that we can get a document

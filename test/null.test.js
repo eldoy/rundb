@@ -1,8 +1,7 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')()
 
 describe('Null', () => {
-  beforeAll(async () => db = await connection())
+
   beforeEach(async () => await db.drop())
 
   it('should not insert null', async () => {
@@ -18,15 +17,5 @@ describe('Null', () => {
     const update = await db('project').update({ _id: first._id }, { name: null })
     first = await db('project').get()
     expect(first.name).toBeUndefined()
-  })
-
-  it('should not return any fields with null as value', async () => {
-    const projectId = (await db.base.collection('project').insertOne({ _id: '1', name: null })).insertedId
-    let project = await db.base.collection('project').findOne({ _id: '1' })
-    expect(project.name).toBeNull()
-    project = await db('project').get()
-    expect(project.name).toBeUndefined()
-    let projects = await db('project').find()
-    expect(projects[0].name).toBeUndefined()
   })
 })
