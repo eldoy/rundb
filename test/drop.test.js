@@ -1,8 +1,6 @@
-const connection = require('../index.js')
-let db
+const db = require('../index.js')()
 
 describe('Drop', () => {
-  beforeAll(async () => db = await connection())
   beforeEach(async () => await db.drop())
 
   it('should drop the database', async () => {
